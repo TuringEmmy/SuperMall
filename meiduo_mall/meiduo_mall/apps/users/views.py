@@ -5,6 +5,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from users import serializers
 from users.models import User
 
 
@@ -26,7 +27,7 @@ class UsernameCountView(APIView):
         return Response(data)
 
 
-# ============================判断手机号码是否存在=======================================
+# ============================判断手机号码是否存在===================================
 # GET /mobiles/(?P<mobile>1[3-9]\d{9})/count
 class MobileCountView(APIView):
     """手机号数量"""
@@ -43,9 +44,7 @@ class MobileCountView(APIView):
         return Response(data)
 
 
-
-
-# =================================用户注册==================================
+# =================================用户注册=========================================
 # /users/
 
 
@@ -54,3 +53,4 @@ class UserView(CreateAPIView):
     用户注册
     username,password,password3,sms_code,mobile,allow
     """
+    serializer_class = serializers.CreateUserSerializer
