@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="948356f2-f04f-47ca-b81c-c07dec40ff7b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front_end_pc/js/register.js" afterPath="$PROJECT_DIR$/front_end_pc/js/register.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/urls.py" afterPath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/views.py" afterPath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,8 +33,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="61" lean-forward="false" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
+            <state relative-caret-position="150">
+              <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
               <folding>
                 <element signature="e#69#101#0" expanded="true" />
               </folding>
@@ -41,27 +42,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="29" column="21" lean-forward="false" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="21" />
+            <state relative-caret-position="154">
+              <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-                <marker date="1540475207094" expanded="false" signature="338:601" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="register.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/front_end_pc/js/register.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="71" column="19" lean-forward="false" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="19" />
-              <folding>
-                <element signature="e#3565#5287#0" expanded="false" />
-                <element signature="e#5334#5541#0" expanded="false" />
+                <marker date="1540476092604" expanded="false" signature="388:651" ph="..." />
+                <marker date="1540476092604" expanded="false" signature="810:1061" ph="..." />
               </folding>
             </state>
           </provider>
@@ -107,9 +96,9 @@
         <option value="$PROJECT_DIR$/meiduo_mall/celery_tasks/config.py" />
         <option value="$PROJECT_DIR$/meiduo_mall/celery_tasks/sms/tasks.py" />
         <option value="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/veritifications/views.py" />
+        <option value="$PROJECT_DIR$/front_end_pc/js/register.js" />
         <option value="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/urls.py" />
         <option value="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/views.py" />
-        <option value="$PROJECT_DIR$/front_end_pc/js/register.js" />
       </list>
     </option>
   </component>
@@ -589,7 +578,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540475215463</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="check_phone is ok in js">
+      <created>1540475612368</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1540475612368</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView">
@@ -648,7 +644,8 @@
     <MESSAGE value="UsernameCountView is ok" />
     <MESSAGE value="username in js is ok" />
     <MESSAGE value="MobileCountView is ok" />
-    <option name="LAST_COMMIT_MESSAGE" value="MobileCountView is ok" />
+    <MESSAGE value="check_phone is ok in js" />
+    <option name="LAST_COMMIT_MESSAGE" value="check_phone is ok in js" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -972,10 +969,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/front_end_pc/js/register.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="71" column="19" lean-forward="false" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="19" />
+          <folding>
+            <element signature="e#3565#5287#0" expanded="false" />
+            <element signature="e#5334#5541#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="61" lean-forward="false" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
+        <state relative-caret-position="150">
+          <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
           <folding>
             <element signature="e#69#101#0" expanded="true" />
           </folding>
@@ -984,22 +992,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="29" column="21" lean-forward="false" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="21" />
+        <state relative-caret-position="154">
+          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-            <marker date="1540475207094" expanded="false" signature="338:601" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front_end_pc/js/register.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="71" column="19" lean-forward="false" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="19" />
-          <folding>
-            <element signature="e#3565#5287#0" expanded="false" />
-            <element signature="e#5334#5541#0" expanded="false" />
+            <marker date="1540476092604" expanded="false" signature="388:651" ph="..." />
+            <marker date="1540476092604" expanded="false" signature="810:1061" ph="..." />
           </folding>
         </state>
       </provider>
