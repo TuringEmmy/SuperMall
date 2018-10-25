@@ -3,10 +3,11 @@
 # project   SuperMall
 
 # 发送短信模板ID
+SMS_CODE_TEMP_ID = 1
+
 from celery_tasks.main import celery_app
 from celery_tasks.sms.yuntongxun.sms import CCP
 
-SMS_CODE_TEMP_ID = 1
 
 # 获取日志
 import logging
