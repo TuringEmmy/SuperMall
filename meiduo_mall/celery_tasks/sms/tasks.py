@@ -3,6 +3,7 @@
 # project   SuperMall
 
 # 发送短信模板ID
+from celery_tasks.main import celery_app
 from celery_tasks.sms.yuntongxun.sms import CCP
 
 SMS_CODE_TEMP_ID = 1
@@ -13,6 +14,8 @@ import logging
 logger = logging.getLogger('django')
 
 
+# 一定要注意添加装饰其
+@celery_app.task(name='send_sms_code')
 def send_sms_code(mobile, sms_code, expires):
     """发送短信的任务函数"""
     try:
