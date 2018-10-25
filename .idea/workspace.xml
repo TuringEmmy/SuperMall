@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="948356f2-f04f-47ca-b81c-c07dec40ff7b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/serializers.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/views.py" afterPath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -128,8 +126,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="37" />
     <option name="y" value="24" />
-    <option name="width" value="770" />
-    <option name="height" value="582" />
+    <option name="width" value="1325" />
+    <option name="height" value="591" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -651,7 +649,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540476127443</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="serializers in user is ok">
+      <created>1540478325444</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1540478325444</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -664,7 +669,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="37" y="24" width="770" height="582" extended-state="6" />
+    <frame x="37" y="24" width="1325" height="591" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37931034" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -712,7 +717,8 @@
     <MESSAGE value="MobileCountView is ok" />
     <MESSAGE value="check_phone is ok in js" />
     <MESSAGE value="UserView for rejister" />
-    <option name="LAST_COMMIT_MESSAGE" value="UserView for rejister" />
+    <MESSAGE value="serializers in user is ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="serializers in user is ok" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
