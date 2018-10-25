@@ -81,10 +81,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "shopMall",
-        "HOST":"127.0.0.1",
-        "PORT":'3306',
-        "USER":"turing",
-        "PASSWORD":'mysql',
+        "HOST": "127.0.0.1",
+        "PORT": '3306',
+        "USER": "turing",
+        "PASSWORD": 'mysql',
     }
 }
 
@@ -124,7 +124,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
 # =====================自定义redsi配置=========================
 CACHES = {
     "default": {
@@ -144,8 +143,6 @@ CACHES = {
 }
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "session"
-
-
 
 # ====================自定义日志配置===========================
 LOGGING = {
@@ -189,10 +186,11 @@ LOGGING = {
     }
 }
 
-
-
 # ========================REST_FRAMEWORK配置===================
-REST_FRAMEWORK={
+REST_FRAMEWORK = {
     # 异常处理
-    'EXCEPTION_HANDLER':'meiduo_mall.utils.exceptions.exception_handler'
+    'EXCEPTION_HANDLER': 'meiduo_mall.utils.exceptions.exception_handler'
 }
+
+# ==========================关于User模型的设置======================
+AUTH_USER_MODEL = 'users.User'
