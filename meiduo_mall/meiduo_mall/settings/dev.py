@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 前端与后端分处不同的域名，我们需要为后端添加跨域访问的支持。
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -154,7 +156,7 @@ CACHES = {
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "session"
 
-# ====================自定义日志配置===========================
+# ====================自定义日志配置==================================================
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,  # 是否禁用已经存在的日志器
@@ -196,14 +198,26 @@ LOGGING = {
     }
 }
 
-# ========================REST_FRAMEWORK配置===================
+# ========================REST_FRAMEWORK配置=========================================
 REST_FRAMEWORK = {
     # 异常处理
     'EXCEPTION_HANDLER': 'meiduo_mall.utils.exceptions.exception_handler'
 }
 
-# ==========================关于User模型的设置======================
+# ==========================关于User模型的设置=========================================
 AUTH_USER_MODEL = 'users.User'
 
-# ============================域名的设置===========================
+# ============================域名的设置==============================================
 ALLOWED_HOSTS = ['api.meiduo.site', '127.0.0.1', 'localhost']
+
+# =========================添加白名单=================================================
+# CORS
+CORS_ORIGIN_WHITELIST = (
+    '127.0.0.1:8080',
+    'localhost:8080',
+    'www.meiduo.site:8080',
+)
+CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie
+
+# 凡是出现在白名单中的域名，都可以访问后端接口
+# CORS_ALLOW_CREDENTIALS 指明在跨域访问中，后端是否支持对cookie的操作。
