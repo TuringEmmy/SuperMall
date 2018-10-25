@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'rest_framework',
     'veritifications.apps.VerificationsConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -203,7 +204,6 @@ REST_FRAMEWORK = {
 
 # ==========================关于User模型的设置======================
 AUTH_USER_MODEL = 'users.User'
-
 
 # ============================域名的设置===========================
 ALLOWED_HOSTS = ['api.meiduo.site', '127.0.0.1', 'localhost']
