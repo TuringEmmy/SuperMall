@@ -54,8 +54,8 @@
       <file leaf-file-name="serializers.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="23" column="97" lean-forward="false" selection-start-line="23" selection-start-column="97" selection-end-line="23" selection-end-column="97" />
+            <state relative-caret-position="268">
+              <caret line="102" column="46" lean-forward="true" selection-start-line="102" selection-start-column="32" selection-end-line="102" selection-end-column="46" />
               <folding>
                 <element signature="e#70#79#0" expanded="true" />
               </folding>
@@ -125,8 +125,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="37" />
     <option name="y" value="24" />
-    <option name="width" value="1325" />
-    <option name="height" value="591" />
+    <option name="width" value="598" />
+    <option name="height" value="576" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -670,7 +670,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540625780750</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="增加token">
+      <created>1540627413804</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1540627413804</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TodoView">
@@ -683,7 +690,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="37" y="24" width="1325" height="591" extended-state="6" />
+    <frame x="37" y="24" width="598" height="576" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26309523" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -734,7 +741,8 @@
     <MESSAGE value="serializers in user is ok" />
     <MESSAGE value="register in js for submit is ok" />
     <MESSAGE value="后端注册的实现" />
-    <option name="LAST_COMMIT_MESSAGE" value="后端注册的实现" />
+    <MESSAGE value="增加token" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加token" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1073,8 +1081,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="23" column="97" lean-forward="false" selection-start-line="23" selection-start-column="97" selection-end-line="23" selection-end-column="97" />
+        <state relative-caret-position="268">
+          <caret line="102" column="46" lean-forward="true" selection-start-line="102" selection-start-column="32" selection-end-line="102" selection-end-column="46" />
           <folding>
             <element signature="e#70#79#0" expanded="true" />
           </folding>
