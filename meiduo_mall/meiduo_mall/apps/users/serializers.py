@@ -12,6 +12,8 @@ from users.models import User
 class CreateUserSerializer(serializers.ModelSerializer):
     """创建用户序列化器"""
 
+    token = serializers.CharField(label='登陆状态token',read_only=True)
+
     password2 = serializers.CharField(label='确认密码', write_only=True)
     sms_code = serializers.CharField(label='短信验证码', write_only=True)
     allow = serializers.CharField(label='同意协议', write_only=True)
@@ -19,7 +21,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
 
-        fields = ('id', 'username', 'password', 'password2', 'sms_code', 'mobile', 'allow')
+        fields = ('id', 'username', 'password', 'password2', 'sms_code', 'mobile', 'allow','token')
 
         extra_kwargs = {
             'username': {
@@ -95,5 +97,8 @@ class CreateUserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
 
         user.save()
+
+
+        # ======================补充生成记录状态的token===========
 
         return user
