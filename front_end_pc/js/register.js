@@ -24,19 +24,20 @@ var vm = new Vue({
         allow: false
     },
     methods: {
-        check_username: function () {
+        check_username: function (){
             var len = this.username.length;
-            if (len < 5 || len > 20) {
+            if(len<5||len>20) {
                 this.error_name_message = '请输入5-20个字符的用户名';
                 this.error_name = true;
             } else {
                 this.error_name = false;
             }
+
             // 检查重名
             if (this.error_name == false) {
                 axios.get(this.host + '/usernames/' + this.username + '/count/', {
-                    responseType: 'json'
-                })
+                        responseType: 'json'
+                    })
                     .then(response => {
                         if (response.data.count > 0) {
                             this.error_name_message = '用户名已存在';
@@ -49,37 +50,35 @@ var vm = new Vue({
                         console.log(error.response.data);
                     })
             }
-        },
 
-        check_pwd: function () {
+        },
+        check_pwd: function (){
             var len = this.password.length;
-            if (len < 8 || len > 20) {
+            if(len<8||len>20){
                 this.error_password = true;
             } else {
                 this.error_password = false;
             }
         },
-
-        check_cpwd: function () {
-            if (this.password != this.password2) {
+        check_cpwd: function (){
+            if(this.password!=this.password2) {
                 this.error_check_password = true;
             } else {
                 this.error_check_password = false;
             }
         },
-
-        check_phone: function () {
+        check_phone: function (){
             var re = /^1[345789]\d{9}$/;
-            if (re.test(this.mobile)) {
+            if(re.test(this.mobile)) {
                 this.error_phone = false;
             } else {
                 this.error_phone_message = '您输入的手机号格式不正确';
                 this.error_phone = true;
             }
             if (this.error_phone == false) {
-                axios.get(this.host + '/mobiles/' + this.mobile + '/count/', {
-                    responseType: 'json'
-                })
+                axios.get(this.host + '/mobiles/'+ this.mobile + '/count/', {
+                        responseType: 'json'
+                    })
                     .then(response => {
                         if (response.data.count > 0) {
                             this.error_phone_message = '手机号已存在';
@@ -93,33 +92,23 @@ var vm = new Vue({
                     })
             }
         },
-
-        check_sms_code: function () {
-            if (!this.sms_code) {
+        check_sms_code: function(){
+            if(!this.sms_code){
                 this.error_sms_code_message = '请填写短信验证码';
                 this.error_sms_code = true;
-                使用方法
-
-                sessionStorage.变量名 = 变量值   // 保存数据
-                sessionStorage.变量名  // 读取数据
-                sessionStorage.clear()  // 清除所有sessionStorage保存的数据
-
-                localStorage.变量名 = 变量值   // 保存数据
-                localStorage.变量名  // 读取数据
-                localStorage.clear()  // 清除所有localStorage保存的数据   } else {
+            } else {
                 this.error_sms_code = false;
             }
         },
-
-        check_allow: function () {
-            if (!this.allow) {
+        check_allow: function(){
+            if(!this.allow) {
                 this.error_allow = true;
             } else {
                 this.error_allow = false;
             }
         },
         // 发送手机短信验证码
-        send_sms_code: function () {
+        send_sms_code: function(){
             if (this.sending_flag == true) {
                 return;
             }
@@ -135,8 +124,8 @@ var vm = new Vue({
 
             // 向后端接口发送请求，让后端发送短信验证码
             axios.get(this.host + '/sms_codes/' + this.mobile + '/', {
-                responseType: 'json'
-            })
+                    responseType: 'json'
+                })
                 .then(response => {
                     // 表示后端发送短信成功
                     // 倒计时60秒，60秒后允许用户再次点击发送短信验证码的按钮
@@ -168,8 +157,7 @@ var vm = new Vue({
                 })
         },
         // 注册
-        // 注册
-        on_submit: function () {
+        on_submit: function(){
             this.check_username();
             this.check_pwd();
             this.check_cpwd();
@@ -177,29 +165,28 @@ var vm = new Vue({
             this.check_sms_code();
             this.check_allow();
 
-            if (this.error_name == false && this.error_password == false && this.error_check_password == false
+            if(this.error_name == false && this.error_password == false && this.error_check_password == false
                 && this.error_phone == false && this.error_sms_code == false && this.error_allow == false) {
                 axios.post(this.host + '/users/', {
-                    username: this.username,
-                    password: this.password,
-                    password2: this.password2,
-                    mobile: this.mobile,
-                    sms_code: this.sms_code,
-                    allow: this.allow.toString()
-                }, {
-                    responseType: 'json'
-                })
+                        username: this.username,
+                        password: this.password,
+                        password2: this.password2,
+                        mobile: this.mobile,
+                        sms_code: this.sms_code,
+                        allow: this.allow.toString()
+                    }, {
+                        responseType: 'json'
+                    })
                     .then(response => {
-                        // 记录用户的登录状态
+                        // 保存用户数据(jwt token)
                         sessionStorage.clear();
                         localStorage.clear();
-                        localStorage.token = response.data.token;
-                        localStorage.username = response.data.username;
                         localStorage.user_id = response.data.id;
+                        localStorage.username = response.data.username;
+                        localStorage.token = response.data.token;
                         location.href = '/index.html';
-                        // location.href = '/index.html';
                     })
-                    .catch(error => {
+                    .catch(error=> {
                         if (error.response.status == 400) {
                             if ('non_field_errors' in error.response.data) {
                                 this.error_sms_code_message = error.response.data.non_field_errors[0];
@@ -212,7 +199,7 @@ var vm = new Vue({
                         }
                     })
             }
+
         }
     }
-
 });

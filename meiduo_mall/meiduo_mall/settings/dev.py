@@ -11,25 +11,25 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 import datetime
 import os
-
 import sys
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# 项目运行是搜索包目录列表
-# 返回商一级目录,然后在进入apps
+# sys.path: 项目运行时搜索包目录列表
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+# print(sys.path)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4*o7s$b(%7j48qyh7&1g&6pa=hdhms!4ufcb%=zk=mi^fu$xa)'
+SECRET_KEY = '8x3dj=7x3w$=7*z!3dgb6697suelzafq3=^m!bo8gzm2+p4@aa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['api.meiduo.site', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['api.meiduo.site', '127.0.0.1', 'localhost']
+
 
 # Application definition
 
@@ -40,14 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users.apps.UsersConfig',
     'rest_framework',
-    'veritifications.apps.VerificationsConfig',
     'corsheaders',
+    # 'meiduo_mall.apps.users.apps.UsersConfig',
+    'users.apps.UsersConfig',
+    'verifications.apps.VerificationsConfig',
 ]
 
 MIDDLEWARE = [
-    # 前端与后端分处不同的域名，我们需要为后端添加跨域访问的支持。
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -78,6 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'meiduo_mall.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -91,6 +92,7 @@ DATABASES = {
         "PASSWORD": 'mysql',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -110,6 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -123,12 +126,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
 
-# =====================自定义redsi配置=========================
+# Django框架缓存设置(如果不做设置，Django框架的默认缓存就是服务器内存)
+# 此处是把Django框架的缓存设置为redis
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -153,10 +158,14 @@ CACHES = {
         }
     }
 }
+
+# 设置将session信息存储到缓存中(缓存已经设置为redis，所以session信息会存储到redis中)
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+# 指定session存储到缓存中空间名称
 SESSION_CACHE_ALIAS = "session"
 
-# ====================自定义日志配置==================================================
+
+# Django框架的日志存储设置
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,  # 是否禁用已经存在的日志器
@@ -198,38 +207,45 @@ LOGGING = {
     }
 }
 
-# ========================REST_FRAMEWORK配置=========================================
+# 输出日志
+# import logging
+# logger = logging.getLogger('django')
+# logger.info('INFO MESSAGE')
+
+
 REST_FRAMEWORK = {
-    # 异常处理
-    'EXCEPTION_HANDLER': 'meiduo_mall.utils.exceptions.exception_handler'
+    # 指定DRF框架异常处理函数
+    'EXCEPTION_HANDLER': 'meiduo_mall.utils.exceptions.exception_handler',
+    # 认证机制设置
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 引入jwt扩展中的jwt认证机制，之后客户端传递了jwt token数据之后
+        # jwt 认证机制会检验jwt token数据有效性，如果无效会直接返回401错误
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 }
 
-# ==========================关于User模型的设置=========================================
+# JWT扩展配置
+JWT_AUTH = {
+    # 设置生成jwt token时，token有效时间
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    # 设置jwt扩展登录视图响应数据函数
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'users.utils.jwt_response_payload_handler',
+}
+
+# 指定Django认证系统所使用的模型类(Django认证系统会已经此模型类生成用户表)
 AUTH_USER_MODEL = 'users.User'
 
-# ============================域名的设置==============================================
-ALLOWED_HOSTS = ['api.meiduo.site', '127.0.0.1', 'localhost']
-
-# =========================添加白名单=================================================
-# CORS
+# CORS跨域请求白名单设置
 CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:8080',
     'localhost:8080',
     'www.meiduo.site:8080',
 )
+
 CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie
 
-# 凡是出现在白名单中的域名，都可以访问后端接口
-# CORS_ALLOW_CREDENTIALS 指明在跨域访问中，后端是否支持对cookie的操作。
-
-# JWT的设置《修改配置文件》
-JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'users.utils.jwt_response_payload_handler',
-}
-
-
-# ==========================用户名或者手机号码登陆自定义========================
-AUTHENTICATION_BACKENDS = [
-    'users.utils.UsernameMobileAuthBackend',
-]
+# 指定Django系统认证后端类
+AUTHENTICATION_BACKENDS = ['users.utils.UsernameMobileAuthBackend']
