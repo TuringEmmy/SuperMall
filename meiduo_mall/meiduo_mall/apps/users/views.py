@@ -19,6 +19,8 @@ class UsernameCountView(APIView):
 
         count = User.objects.filter(username=username).count()
 
+        print(count)
+
         data = {
             'username': username,
             'count': count
@@ -35,7 +37,7 @@ class MobileCountView(APIView):
     def get(self, request, mobile):
         """获取手机号数量"""
         count = User.objects.filter(mobile=mobile).count()
-
+        print(count)
         data = {
             'mobile': mobile,
             'count': count,
@@ -45,12 +47,10 @@ class MobileCountView(APIView):
 
 
 # =================================用户注册=========================================
-# /users/
-
-
+# url(r'^users/$', views.UserView.as_view()),
 class UserView(CreateAPIView):
     """
     用户注册
-    username,password,password3,sms_code,mobile,allow
+    username, password, password2, sms_code, mobile, allow
     """
     serializer_class = serializers.CreateUserSerializer

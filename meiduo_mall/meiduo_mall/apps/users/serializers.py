@@ -3,7 +3,7 @@
 # project   SuperMall
 import re
 
-from django.core.mail import get_connection
+from django_redis import get_redis_connection
 from rest_framework import serializers
 
 from users.models import User
@@ -20,6 +20,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
         model = User
 
         fields = ('id', 'username', 'password', 'password2', 'sms_code', 'mobile', 'allow')
+
         extra_kwargs = {
             'username': {
                 'min_length': 5,
@@ -47,7 +48,6 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
         # 手机号码是否重复
         count = User.objects.filter(mobile=value).count()
-
         if count > 0:
             raise serializers.ValidationError("手机号码已经存在")
 
@@ -55,17 +55,21 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
     def validate_allow(self, value):
         """检验用户是否同意协议"""
+
         if value != 'true':
             raise serializers.ValidationError("晴统一要协议")
+
         return value
 
+    # =======================判断两次密码是否一致==================================
     def validate(self, data):
+
         # 判断两次密码
         if data['password'] != data['password2']:
             raise serializers.ValidationError("两次密码不一样")
 
         # 判断短信验证码
-        redis_conn = get_connection('verify_codes')
+        redis_conn = get_redis_connection('verify_codes')
 
         mobile = data['mobile']
 
@@ -76,14 +80,19 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
         return data
 
+    # =======================创建用户===============================
     def create(self, validated_data):
         """创建用户"""
-        # 移除数据库模型类中不存在的属性
+
+        # 移除数据库模型类中不存在的属性，因为这些信息只是在注册的时候使验证使用，之后没有用，存入数据库也不需要
         del validated_data['password2']
         del validated_data['sms_code']
         del validated_data['allow']
 
         user = super().create(validated_data)
+
+        # 调用django的认证加密密码
+        user.set_password(validated_data['password'])
 
         user.save()
 

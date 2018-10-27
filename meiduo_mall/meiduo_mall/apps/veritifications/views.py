@@ -59,14 +59,14 @@ class SMSCodeView(APIView):
         # ---------------------------使用云通讯给mobile发送短信验证码------------------------------
         expires = constants.SMS_CODE_REDIS_EXPIRES // 60
 
-        try:
-            res = CCP().send_template_sms(mobile, [sms_code, expires], constants.SMS_CODE_TEMP_ID)
-        except Exception as e:
-            logging.error(e)
-            return Response({'message': '发送短信异常'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
-
-        if res != 0:
-            return Response({'message': "发送短信失败"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+        # try:
+        #     res = CCP().send_template_sms(mobile, [sms_code, expires], constants.SMS_CODE_TEMP_ID)
+        # except Exception as e:
+        #     logging.error(e)
+        #     return Response({'message': '发送短信异常'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+        #
+        # if res != 0:
+        #     return Response({'message': "发送短信失败"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
         #
         # # -------------------------------返回应答,发送成功----------------------------------------
         # # form celery_ta

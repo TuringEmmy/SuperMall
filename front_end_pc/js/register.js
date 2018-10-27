@@ -32,10 +32,9 @@ var vm = new Vue({
             } else {
                 this.error_name = false;
             }
-
             // 检查重名
             if (this.error_name == false) {
-                axio.get(this.host + '/usernames/' + this.username + '/count/', {
+                axios.get(this.host + '/usernames/' + this.username + '/count/', {
                     responseType: 'json'
                 })
                     .then(response => {
@@ -43,11 +42,11 @@ var vm = new Vue({
                             this.error_name_message = '用户名已存在';
                             this.error_name = true;
                         } else {
-                            this.error_name = false
+                            this.error_name = false;
                         }
                     })
                     .catch(error => {
-                        console.log(error.response.data)
+                        console.log(error.response.data);
                     })
             }
         },
@@ -77,18 +76,16 @@ var vm = new Vue({
                 this.error_phone_message = '您输入的手机号格式不正确';
                 this.error_phone = true;
             }
-
-            // 使用ajsx
             if (this.error_phone == false) {
-                axios.get(this.host + '/mobiles' + this.mobile + "/count", {
+                axios.get(this.host + '/mobiles/' + this.mobile + '/count/', {
                     responseType: 'json'
                 })
                     .then(response => {
                         if (response.data.count > 0) {
-                            this.error_phone_message = '手机号码已经存在';
+                            this.error_phone_message = '手机号已存在';
                             this.error_phone = true;
                         } else {
-                            this.error_phone = true;
+                            this.error_phone = false;
                         }
                     })
                     .catch(error => {
@@ -163,6 +160,7 @@ var vm = new Vue({
                 })
         },
         // 注册
+        // 注册
         on_submit: function () {
             this.check_username();
             this.check_pwd();
@@ -171,10 +169,9 @@ var vm = new Vue({
             this.check_sms_code();
             this.check_allow();
 
-
-            // 编写axio函数
-            if (this.error_name == false && this.error_password == false && this.error_check_password == false && this.error_phone == false && this.error_sms_code == false && this.error_allow == false) {
-                axios.post('http://127.0.0.1:8000' + '/users', {
+            if (this.error_name == false && this.error_password == false && this.error_check_password == false
+                && this.error_phone == false && this.error_sms_code == false && this.error_allow == false) {
+                axios.post(this.host + '/users/', {
                     username: this.username,
                     password: this.password,
                     password2: this.password2,
@@ -185,23 +182,22 @@ var vm = new Vue({
                     responseType: 'json'
                 })
                     .then(response => {
-                        // 保存后端返回的token数据
-                        localStorage.token = response.token;
-                        localStorage.username = response.data.username;
-                        localStorage.user_id = response.data.id;
-
-                        localStorage.href = '/index.html';
+                        location.href = '/index.html';
                     })
-
                     .catch(error => {
                         if (error.response.status == 400) {
-                            this.error_sms_code_message == '短信验证码错误';
-                            this.error_sms_code == true;
+                            if ('non_field_errors' in error.response.data) {
+                                this.error_sms_code_message = error.response.data.non_field_errors[0];
+                            } else {
+                                this.error_sms_code_message = '数据有误';
+                            }
+                            this.error_sms_code = true;
                         } else {
-                            console.log(error.response.data)
+                            console.log(error.response.data);
                         }
                     })
             }
         }
     }
+
 });
