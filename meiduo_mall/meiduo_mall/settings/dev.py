@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+import datetime
 import os
 
 import sys
@@ -221,3 +221,9 @@ CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie
 
 # 凡是出现在白名单中的域名，都可以访问后端接口
 # CORS_ALLOW_CREDENTIALS 指明在跨域访问中，后端是否支持对cookie的操作。
+
+# JWT的设置《修改配置文件》
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'users.utils.jwt_response_payload_handler',
+}
