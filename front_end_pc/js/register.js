@@ -98,7 +98,15 @@ var vm = new Vue({
             if (!this.sms_code) {
                 this.error_sms_code_message = '请填写短信验证码';
                 this.error_sms_code = true;
-            } else {
+                使用方法
+
+                sessionStorage.变量名 = 变量值   // 保存数据
+                sessionStorage.变量名  // 读取数据
+                sessionStorage.clear()  // 清除所有sessionStorage保存的数据
+
+                localStorage.变量名 = 变量值   // 保存数据
+                localStorage.变量名  // 读取数据
+                localStorage.clear()  // 清除所有localStorage保存的数据   } else {
                 this.error_sms_code = false;
             }
         },
@@ -182,7 +190,14 @@ var vm = new Vue({
                     responseType: 'json'
                 })
                     .then(response => {
+                        // 记录用户的登录状态
+                        sessionStorage.clear();
+                        localStorage.clear();
+                        localStorage.token = response.data.token;
+                        localStorage.username = response.data.username;
+                        localStorage.user_id = response.data.id;
                         location.href = '/index.html';
+                        // location.href = '/index.html';
                     })
                     .catch(error => {
                         if (error.response.status == 400) {
