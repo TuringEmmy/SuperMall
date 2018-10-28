@@ -10,5 +10,4 @@ class BaseModel(models.Model):
 
     class Meta:
         # 说明这是一个抽象类型类，在进行模型的迁移的当中不会生成 表
-        abstarct = True
-    pass
+        abstract = True
