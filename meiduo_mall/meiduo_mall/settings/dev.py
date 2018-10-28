@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import datetime
 import os
 import sys
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -29,7 +30,6 @@ SECRET_KEY = '8x3dj=7x3w$=7*z!3dgb6697suelzafq3=^m!bo8gzm2+p4@aa'
 DEBUG = True
 
 ALLOWED_HOSTS = ['api.meiduo.site', '127.0.0.1', 'localhost']
-
 
 # Application definition
 
@@ -79,7 +79,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'meiduo_mall.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -93,7 +92,6 @@ DATABASES = {
         "PASSWORD": 'mysql',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -113,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -126,7 +123,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -164,7 +160,6 @@ CACHES = {
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 # 指定session存储到缓存中空间名称
 SESSION_CACHE_ALIAS = "session"
-
 
 # Django框架的日志存储设置
 LOGGING = {
@@ -233,7 +228,7 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
     # 设置jwt扩展登录视图响应数据函数
     'JWT_RESPONSE_PAYLOAD_HANDLER':
-    'users.utils.jwt_response_payload_handler',
+        'users.utils.jwt_response_payload_handler',
 }
 
 # 指定Django认证系统所使用的模型类(Django认证系统会已经此模型类生成用户表)
@@ -250,3 +245,19 @@ CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie
 
 # 指定Django系统认证后端类
 AUTHENTICATION_BACKENDS = ['users.utils.UsernameMobileAuthBackend']
+
+# ====================================QQ登陆的设置================================
+# QQ 第三方登陆相关配置信息
+# QQ_APP_ID = '101474184'
+# QQ_APP_KEY = 'c6ce949e04e12ecc909ae6a8b09b637c'
+# QQ_REDIRECT_URL = 'http://www.meiduo.site:8080/oauth_callback.html'
+
+
+# 开发者应用的app
+QQ_CLIENT_ID = '101474184'
+# QQ开发者应用的appkey
+QQ_CLIENT_SECRET = 'c6ce949e04e12ecc909ae6a8b09b637c'
+# Qq回调的地址
+QQ_REDIRECT_URI = 'http://www.meiduo.site:8080/oauth_callback.html'
+# qq登陆成功之后的跳转页面，默认跳转到首页
+QQ_STATE = '/'
