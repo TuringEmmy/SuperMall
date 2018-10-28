@@ -208,7 +208,7 @@ LOGGING = {
 # logger = logging.getLogger('django')
 # logger.info('INFO MESSAGE')
 
-
+# =======================================DRF框架=====================================
 REST_FRAMEWORK = {
     # 指定DRF框架异常处理函数
     'EXCEPTION_HANDLER': 'meiduo_mall.utils.exceptions.exception_handler',
@@ -222,6 +222,8 @@ REST_FRAMEWORK = {
     ),
 }
 
+
+# ======================================WT扩展配置======================================
 # JWT扩展配置
 JWT_AUTH = {
     # 设置生成jwt token时，token有效时间
