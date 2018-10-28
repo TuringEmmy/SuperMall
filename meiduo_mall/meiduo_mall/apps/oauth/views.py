@@ -2,11 +2,13 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import status
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from oauth.exceptions import QQAPIError
 from oauth.models import OAuthQQUser
+from oauth.serializers import QQAuthUserSerializer
 from oauth.utils import OAuthQQ
 
 
@@ -38,9 +40,45 @@ class QQAuthURLView(APIView):
         # 3.返回QQ登陆的网站
         return Response({"login_url": login_url})
 
+    def post(self, request):
+        """
+        保存绑定QQ登陆用户信息
+        1.获取参数并进行校验(参数完整，手机号格式，大圩您验证码是否正确，access_token是否有效)
+        2.保存绑定QQ登陆用户的数据
+        3.返回应答
+        :param request:
+        :return:
+        """
+
+        # 1.获取参数并进行校验(参数完整，手机号格式，大圩您验证码是否正确，access_token是否有效)
+
+        # 2.保存绑定QQ登陆用户的数据
+
+        # 3.返回应答
+
 
 # GET /oauth/qq/user/?code=<code>
-class QQAuthUserView(APIView):
+# class QQAuthUserView(APIView):
+class QQAuthUserView(GenericAPIView):
+    serializer_class = QQAuthUserSerializer
+
+    def post(self, request):
+        """
+        保存绑定QQ登陆用户信息
+        1.获取参数并进行校验
+        2.保存绑定QQ登陆用户的数据
+        3.返回应答
+        :param request:
+        :return:
+        """
+        # 1.获取参数并进行校验
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # 2.保存绑定QQ登陆用户的数据(create)
+        serializer.save()
+        # 3.返回应答
+
     def get(self, request):
         """
         获取QQ登陆用户的openid
@@ -72,7 +110,7 @@ class QQAuthUserView(APIView):
             # 服务不可用
             return Response({"message": "QQ登陆遗异常"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
-        # 根据openid判断是否绑定过
+        # ======================根据openid判断是否绑定过==============================
         try:
             qq_user = OAuthQQUser.objects.get(openid=openid)
         except OAuthQQUser.DoesNotExist:
@@ -84,7 +122,6 @@ class QQAuthUserView(APIView):
 
         else:
             # 说明绑定过本网站,直接欠发达jwt token并返回
-
 
             # 通过外键关联在QQ表中查询外交按id
             user = qq_user.user
@@ -105,7 +142,7 @@ class QQAuthUserView(APIView):
 
             # 返回数据
             res_data = {
-                'id': user.id,
+                'user_id': user.id,
                 'username': user.username,
                 'token': token
             }
