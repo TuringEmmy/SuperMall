@@ -72,12 +72,16 @@ class QQAuthUserView(GenericAPIView):
         :return:
         """
         # 1.获取参数并进行校验
+        # serializer = self.get_serializer(data=request.data)
+        # serializer.is_valid(raise_exception=True)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
 
         # 2.保存绑定QQ登陆用户的数据(create)
         serializer.save()
         # 3.返回应答
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
 
     def get(self, request):
         """
@@ -98,14 +102,14 @@ class QQAuthUserView(GenericAPIView):
         if code is None:
             return Response({'message': "缺少code参数"}, status=status.HTTP_400_BAD_REQUEST)
 
-        # 获取Qq灯笼裤用户的openid
+        # 获取QQ登陆用户的openid
         oauth = OAuthQQ()
 
         try:
             # 根据code请求QQ服务器获取access_token
-            access_token = oauth.get_access_token(code=code)
+            access_token = oauth.get_access_token(code)
             # 根据access_token获取openid
-            openid = oauth.get_openid(access_token=access_token)
+            openid = oauth.get_openid(access_token)
         except QQAPIError:
             # 服务不可用
             return Response({"message": "QQ登陆遗异常"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)

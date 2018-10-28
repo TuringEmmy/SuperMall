@@ -20,7 +20,7 @@ class QQAuthUserSerializer(serializers.ModelSerializer):
     token = serializers.CharField(label='JWT Token', read_only=True)
 
     # 不在让他自动生成，我要自定义《里面有正则》
-    mobile = serializers.RegexField(label='手机',regex=r'1[3-9\d{9}$',write_only=True)
+    mobile = serializers.RegexField(label='手机', regex=r'1[3-9]\d{9}$', write_only=True)
 
     class Meta:
         model = User
@@ -38,11 +38,11 @@ class QQAuthUserSerializer(serializers.ModelSerializer):
             # },
             'password': {
                 'write_only': True,
-                'min_length':8,
-                'max_length':20,
-                'error_messages':{
-                    'min_length':"仅允许8-20个字符的密码",
-                    'max_length':"仅允许8-20个字符串的密码"
+                'min_length': 8,
+                'max_length': 20,
+                'error_messages': {
+                    'min_length': "仅允许8-20个字符的密码",
+                    'max_length': "仅允许8-20个字符串的密码"
                 }
             }
         }
@@ -57,7 +57,6 @@ class QQAuthUserSerializer(serializers.ModelSerializer):
         access_token = attrs['access_token']
         openid = OAuthQQ.check_save_user_token(access_token)
 
-
         if openid is None:
             raise serializers.ValidationError("无效的access_token")
 
@@ -68,7 +67,7 @@ class QQAuthUserSerializer(serializers.ModelSerializer):
 
         redis_conn = get_redis_connection('verify_codes')
 
-        real_sms_code = redis_conn.get('sms_%s'%mobile)
+        real_sms_code = redis_conn.get('sms_%s' % mobile)
 
         if real_sms_code is None:
             raise serializers.ValidationError("短信验证码已经过期")
@@ -91,12 +90,10 @@ class QQAuthUserSerializer(serializers.ModelSerializer):
             if not user.check_password(password):
                 raise serializers.ValidationError("用户密码错误")
 
-
         # 给attrs字典添加元素user,以便在保存绑定QQ登陆用户的数据直接使用
         attrs['user'] = user
 
-
-        attrs['openid']
+        attrs['openid'] = openid
 
         return attrs
 
@@ -112,11 +109,19 @@ class QQAuthUserSerializer(serializers.ModelSerializer):
             username = base64.b64decode(os.urandom(13))
             password = validated_data['password']
             mobile = validated_data['mobile']
-            user = User.objects.create(username=username,password=password,mobile=mobile)
+            user = User.objects.create(username=username, password=password, mobile=mobile)
+
+            # 修改为加密密码
+            user.set_password(validated_data.get['password'])
+            user.save()
+
+        # 保存绑定QQ用户的数据
+        openid = validated_data['openid']
+
         # 保存绑定QQ用户的数据
         OAuthQQUser.objects.create(
-            user = user,
-            openid = validated_data['openid']
+            user=user,
+            openid=openid,
         )
 
         # 由服务器生成jwt token数据,直接签发jwt token
