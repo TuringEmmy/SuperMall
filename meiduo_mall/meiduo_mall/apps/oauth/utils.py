@@ -124,6 +124,8 @@ class OAuthQQ(object):
 
         serializer = TJWSSerializer(secret_key, expires)
 
+
+        # 进行加密操作
         token = serializer.dumps({'openid': openid})
         return token.decode()
 
