@@ -6,6 +6,15 @@ from rest_framework import serializers
 from users.models import User
 
 
+class UserDetailSerializer(serializers.ModelSerializer):
+    """这个只是用作序列化器"""
+
+    class Meta:
+        model = User
+
+        fields = ('id', 'username', 'mobile', 'email', 'email_active')
+
+
 class UserSerializer(serializers.ModelSerializer):
     """用户注册序列化器类"""
     password2 = serializers.CharField(label='重复密码', write_only=True)
@@ -73,13 +82,13 @@ class UserSerializer(serializers.ModelSerializer):
         # 从redis中获取真实的短信验证码内容
         redis_conn = get_redis_connection('verify_codes')
         # bytes
-        real_sms_code = redis_conn.get('sms_%s' % mobile) # None
+        real_sms_code = redis_conn.get('sms_%s' % mobile)  # None
 
         if real_sms_code is None:
             raise serializers.ValidationError('短信验证码已过期')
 
         # 对比短信验证码
-        sms_code = attrs['sms_code'] # str
+        sms_code = attrs['sms_code']  # str
 
         if sms_code != real_sms_code.decode():
             raise serializers.ValidationError('短信验证码错误')
@@ -114,22 +123,3 @@ class UserSerializer(serializers.ModelSerializer):
 
         # 返回user
         return user
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

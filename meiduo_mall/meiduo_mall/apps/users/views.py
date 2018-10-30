@@ -3,11 +3,52 @@ from rest_framework import status
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView,RetrieveAPIView
+
+# 权限管理的
+from rest_framework.permissions import IsAuthenticated
 
 from users.models import User
-from users.serializers import UserSerializer
+from users.serializers import UserSerializer, UserDetailSerializer
+
+
 # Create your views here.
+
+
+# GET /user/
+# class UserDetailView(GenericAPIView):
+class UserDetailView(RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+
+    # 导入序列化器
+    serializer_class = UserDetailSerializer
+
+    # 重写get_object方法
+    def get_object(self):
+        """返回当前的user"""
+
+        # 这个没有request的参数，可以使用self.request获取
+        return self.request.user
+    #
+    # # 个人用户登陆需要权限管理
+    # def get(self, request):
+    #     """
+    #     获取用户个人信息
+    #     1. 获取登陆用户的user
+    #     2. 将user数据序列化并返回
+    #
+    #
+    #     补充：request拥有user属性（添加案件权限后会有认证用户和匿名用户之分）
+    #     self.request就是请求的request对象
+    #     """
+    #     # 1. 获取登陆用户的user
+    #     # user = request.user
+    #     # 替换为下面的方法
+    #     user = self.get_object()
+    #
+    #     # 2. 将user数据序列化并返回
+    #     serializer = self.get_serializer(user)
+    #     return Response(serializer.data)
 
 
 # POST /users/
@@ -38,6 +79,7 @@ class MobileCountView(APIView):
     """
     手机号数量
     """
+
     def get(self, request, mobile):
         """
         获取指定手机号数量
@@ -57,6 +99,7 @@ class UsernameCountView(APIView):
     """
     用户名数量
     """
+
     def get(self, request, username):
         """
         获取指定用户名数量
