@@ -7,6 +7,7 @@ from django.conf import settings
 
 
 # 这里钥匙用token，所以到导包
+from itsdangerous import BadData
 from itsdangerous import TimedJSONWebSignatureSerializer as TJWSSerializer
 # Create your models here.
 from users import constants
@@ -46,6 +47,25 @@ class User(AbstractUser):
 
         return verify_url
 
+    @staticmethod
+    def check_verify_email_token(token):
+        """
+        检查验证邮件的token
+        """
+        serializer = TJWSSerializer(settings.SECRET_KEY, expires_in=constants.VERIFY_EMAIL_TOKEN_EXPIRES)
+        try:
+            data = serializer.loads(token)
+        except BadData:
+            return None
+        else:
+            email = data.get('email')
+            user_id = data.get('user_id')
+            try:
+                user = User.objects.get(id=user_id, email=email)
+            except User.DoesNotExist:
+                return None
+            else:
+                return user
 
 
 
