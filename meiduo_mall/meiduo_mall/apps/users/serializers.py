@@ -6,6 +6,32 @@ from rest_framework import serializers
 from users.models import User
 
 
+# ==============================邮箱验证的序列化器============================
+class EmailSerializer(serializers.ModelSerializer):
+    """邮箱学历恶化器类"""
+
+    class Meta:
+        model = User
+        fields = ('id', 'email')
+
+        # 对于emaill的，django里面自由有，所以不用砸门自己进行编写校验的逻辑
+
+    def update(self, instance, validated_data):
+        """设置登录用户的邮箱病给用户邮箱发送验证邮件"""
+        # 设置登陆用户的=邮箱
+        email = validated_data['email']
+        instance.email = email
+        instance.save()
+
+
+        # TODO: 给用户邮箱发送验证邮件
+
+        # 返回instance
+
+        return instance
+
+
+
 class UserDetailSerializer(serializers.ModelSerializer):
     """这个只是用作序列化器"""
 
