@@ -39,13 +39,13 @@ class EmailSerializer(serializers.ModelSerializer):
         verify_url = instance.generate_verify_url()
 
         # 发送emial邮箱发送验证邮件
-        subject = "美多商城邮箱验证"
-
-        html_message = '<p>尊敬的用户您好！</p>' \
-                   '<p>感谢您使用美多商城。</p>' \
-                   '<p>您的邮箱为：%s 。请点击此链接激活您的邮箱：</p>' \
-                   '<p><a href="%s">%s<a></p>' % (email, verify_url, verify_url)
-        send_mail(subject, "", settings.EMAIL_FROM, [email], html_message=html_message)
+        # subject = "美多商城邮箱验证"
+        #
+        # html_message = '<p>尊敬的用户您好！</p>' \
+        #            '<p>感谢您使用美多商城。</p>' \
+        #            '<p>您的邮箱为：%s 。请点击此链接激活您的邮箱：</p>' \
+        #            '<p><a href="%s">%s<a></p>' % (email, verify_url, verify_url)
+        # send_mail(subject, "", settings.EMAIL_FROM, [email], html_message=html_message)
 
 
         # 返回instance
@@ -60,6 +60,10 @@ message 普通邮件正文， 普通字符串
 from_email 发件人
 recipient_list 收件人列表
 html_message 多媒体邮件正文，可以是html字符串
+
+
+
+注意双面又是一个需要立即额作出应答的代码,抽取出来使用多进程
 """
 
 
