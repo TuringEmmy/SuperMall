@@ -20,7 +20,7 @@ from users.serializers import UserSerializer, UserDetailSerializer, EmailSeriali
 
 # =================================邮箱验证的处理==============================
 # email/verification/
-class EmailVerifyView(object):
+class EmailVerifyView(APIView):
     """
        邮箱验证
        """
