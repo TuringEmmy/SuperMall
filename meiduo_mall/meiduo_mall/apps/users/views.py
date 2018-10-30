@@ -3,7 +3,7 @@ from rest_framework import status
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView, RetrieveAPIView,UpdateAPIView
+from rest_framework.generics import GenericAPIView, RetrieveAPIView, UpdateAPIView
 
 # 权限管理的
 from rest_framework.permissions import IsAuthenticated
@@ -40,6 +40,7 @@ class EmailVerifyView(object):
             user.save()
             return Response({'message': 'OK'})
 
+
 # ========================================邮箱====================================
 # PUT /email/
 # class EmailView(APIView):
@@ -54,35 +55,35 @@ class EmailView(UpdateAPIView):
     def get_object(self):
         """返回当前登陆的user"""
         return self.request.user
-    #
-    # def put(self, request):
-    #     """
-    #     设置登录用户的邮箱
-    #     :param request:
-    #     :return:
-    #     1. 获取登陆用户的邮箱
-    #     2. 获取emaill病进行校验（email,）
-    #     3.设置登录用户邮箱病给用户邮箱验证邮件
-    #     4,。返回应答，邮箱设置成功
-    #     """
-    #     # 1. 获取登陆用户的邮箱
-    #     # user = request.user
-    #
-    #     self.get_object()
-    #
-    #     # 2. 获取emaill病进行校验（email,）
-    #     # 其实这里也可以使用序列化器来完成
-    #     serializer = self.get_serializer(data=request.data)
-    #     # 验证序列
-    #     serializer.is_valid(raise_exception=True)
-    #
-    #     # 3.设置登录用户邮箱病给用户邮箱验证邮件update
-    #     serializer.save()
-    #     # 调用save函数的时候，要重写upodate的方法哦
-    #
-    #
-    #     # 4。 返回应答，邮箱设置成功
-    #     return Response(serializer.data)
+        #
+        # def put(self, request):
+        #     """
+        #     设置登录用户的邮箱
+        #     :param request:
+        #     :return:
+        #     1. 获取登陆用户的邮箱
+        #     2. 获取emaill病进行校验（email,）
+        #     3.设置登录用户邮箱病给用户邮箱验证邮件
+        #     4,。返回应答，邮箱设置成功
+        #     """
+        #     # 1. 获取登陆用户的邮箱
+        #     # user = request.user
+        #
+        #     self.get_object()
+        #
+        #     # 2. 获取emaill病进行校验（email,）
+        #     # 其实这里也可以使用序列化器来完成
+        #     serializer = self.get_serializer(data=request.data)
+        #     # 验证序列
+        #     serializer.is_valid(raise_exception=True)
+        #
+        #     # 3.设置登录用户邮箱病给用户邮箱验证邮件update
+        #     serializer.save()
+        #     # 调用save函数的时候，要重写upodate的方法哦
+        #
+        #
+        #     # 4。 返回应答，邮箱设置成功
+        #     return Response(serializer.data)
 
 
 """
@@ -209,4 +210,3 @@ class UsernameCountView(APIView):
         }
 
         return Response(data)
-
