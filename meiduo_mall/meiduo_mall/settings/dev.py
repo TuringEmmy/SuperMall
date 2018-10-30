@@ -222,7 +222,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-
 # ======================================WT扩展配置======================================
 # JWT扩展配置
 JWT_AUTH = {
@@ -263,3 +262,19 @@ QQ_CLIENT_SECRET = 'c6ce949e04e12ecc909ae6a8b09b637c'
 QQ_REDIRECT_URI = 'http://www.meiduo.site:8080/oauth_callback.html'
 # qq登陆成功之后的跳转页面，默认跳转到首页
 QQ_STATE = '/'
+
+# ================================================邮件发送的设置=--=========================
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# 邮箱服务器的地址
+EMAIL_HOST = 'smtp.163.com'
+
+# SMTP服务器的端口号
+EMAIL_PORT = 25
+
+# 发送邮件的邮箱
+EMAIL_HOST_USER = 'yonglonggeng@163.com'
+# 在邮箱中设置的客户端授权密码
+EMAIL_HOST_PASSWORD = 'turing'
+# 收件人看到的发件人
+EMAIL_FROM = 'turing的美多商城<yonglonggeng@163.com>'

@@ -1,7 +1,11 @@
 import re
 
+from django.conf import settings
 from django_redis import get_redis_connection
 from rest_framework import serializers
+
+# 发送邮件使用
+from django.core.mail import send_mail
 
 from users.models import User
 
@@ -23,13 +27,40 @@ class EmailSerializer(serializers.ModelSerializer):
         instance.email = email
         instance.save()
 
-
         # TODO: 给用户邮箱发送验证邮件
 
-        # 返回instance
+        # 给用户邮箱发送邮箱验证重需要包含一个验证的链接地址
+        # http://www.meiduo.site:8080/success_verify_email.html?user_id=<user_id>
+        # 这样的url容易让别人恶意的请求
 
+        # 链接地址：http://www.meiduo.site:8080/success_verify_email.html?token=<token>
+        # token当中包含用户的信息
+        # 因为每个用户都修妖这个操作，所以放在user的模型类的当中比较好
+        verify_url = instance.generate_verify_url()
+
+        # 发送emial邮箱发送验证邮件
+        subject = "美多商城邮箱验证"
+
+        html_message = '<p>尊敬的用户您好！</p>' \
+                   '<p>感谢您使用美多商城。</p>' \
+                   '<p>您的邮箱为：%s 。请点击此链接激活您的邮箱：</p>' \
+                   '<p><a href="%s">%s<a></p>' % (email, verify_url, verify_url)
+        send_mail(subject, "", settings.EMAIL_FROM, [email], html_message=html_message)
+
+
+        # 返回instance
         return instance
 
+
+"""
+send_mail(subject, message, from_email, recipient_list,html_message=None)
+
+subject 邮件标题
+message 普通邮件正文， 普通字符串
+from_email 发件人
+recipient_list 收件人列表
+html_message 多媒体邮件正文，可以是html字符串
+"""
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
