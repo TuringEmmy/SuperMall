@@ -6,7 +6,6 @@ from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-# GET /areas/
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from areas.models import Area
@@ -22,6 +21,7 @@ from rest_framework_extensions.cache.mixins import CacheResponseMixin
 # ===================可以使用视图集=================================
 
 
+# GET /areas/
 # class AreasViewSet(ReadOnlyModelViewSet):
 # 比上面的多继承一耳光类,就可以使用到cache,因为很明显,这里的代码,没有任何get或者list函数,所以无法添加装饰器,二灵活有为大的[python 总能有出色的方法区域完成
 
@@ -36,10 +36,15 @@ from rest_framework_extensions.cache.mixins import CacheResponseMixin
 # }
 
 class AreasViewSet(CacheResponseMixin, ReadOnlyModelViewSet):
+# class AreasViewSet( ReadOnlyModelViewSet):
     """地区视图集"""
 
     # 注意:这里需要进行分类了
-    def get_serializer(self, *args, **kwargs):
+    def get_serializer_class(self):
+        """
+        注意:这里不要写错了哦,是获取序列化器的类名
+        上次误写成了get_)serializer导致出现错误,说无法读取的数据类型
+        """
         if self.action == 'list':
             return AreaSerializer
         else:
