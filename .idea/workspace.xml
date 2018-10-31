@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d79c0158-f4ee-44b3-a5c8-4df08b88fb9f" name="Default" comment="">
+    <list default="true" id="d79c0158-f4ee-44b3-a5c8-4df08b88fb9f" name="Default" comment="add Adress model and migration">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/areas/views.py" afterPath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/areas/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/models.py" afterPath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/settings/dev.py" afterPath="$PROJECT_DIR$/meiduo_mall/meiduo_mall/settings/dev.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,13 +42,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
+            <state relative-caret-position="300">
               <caret line="33" column="34" lean-forward="true" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
               <folding>
                 <element signature="e#2150#3334#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/areas/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="35" column="3" lean-forward="true" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="3" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#544#602#0" expanded="false" />
+                <element signature="e#1055#1421#0" expanded="false" />
+                <element signature="e#1421#1481#0" expanded="false" />
+                <element signature="e#1621#2287#0" expanded="false" />
+                <element signature="e#2290#2400#1" expanded="false" />
+                <element signature="e#2403#2416#0" expanded="false" />
+                <element signature="e#2486#3179#0" expanded="false" />
+                <element signature="e#3182#3433#1" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -127,8 +144,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="37" />
     <option name="y" value="24" />
-    <option name="width" value="900" />
-    <option name="height" value="576" />
+    <option name="width" value="1325" />
+    <option name="height" value="601" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -710,11 +727,18 @@
       <option name="project" value="LOCAL" />
       <updated>1540970863829</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="add Adress model and migration">
+      <created>1540973156813</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1540973156813</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="37" y="24" width="900" height="576" extended-state="6" />
+    <frame x="37" y="24" width="1325" height="601" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3783784" sideWeight="0.49304175" order="0" side_tool="false" content_ui="combo" />
@@ -788,7 +812,8 @@
     <MESSAGE value="add test data and select province is ok" />
     <MESSAGE value="provinces is ok" />
     <MESSAGE value="provinces data to optimize" />
-    <option name="LAST_COMMIT_MESSAGE" value="provinces data to optimize" />
+    <MESSAGE value="add Adress model and migration" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Adress model and migration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1105,7 +1130,7 @@
         <state relative-caret-position="315">
           <caret line="21" column="58" lean-forward="false" selection-start-line="21" selection-start-column="58" selection-end-line="21" selection-end-column="58" />
           <folding>
-            <element signature="e#85#117#0" expanded="true" />
+            <element signature="e#85#117#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1137,23 +1162,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/areas/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-30">
-          <caret line="11" column="14" lean-forward="true" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
-          <folding>
-            <element signature="e#544#602#0" expanded="false" />
-            <element signature="e#1055#1421#0" expanded="false" />
-            <element signature="e#1421#1481#0" expanded="false" />
-            <element signature="e#1621#2287#0" expanded="false" />
-            <element signature="e#2290#2400#1" expanded="false" />
-            <element signature="e#2403#2416#0" expanded="false" />
-            <element signature="e#2486#3179#0" expanded="false" />
-            <element signature="e#3182#3433#1" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/utils/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1164,10 +1172,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/users/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
+        <state relative-caret-position="300">
           <caret line="33" column="34" lean-forward="true" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
           <folding>
             <element signature="e#2150#3334#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meiduo_mall/meiduo_mall/apps/areas/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="35" column="3" lean-forward="true" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#544#602#0" expanded="false" />
+            <element signature="e#1055#1421#0" expanded="false" />
+            <element signature="e#1421#1481#0" expanded="false" />
+            <element signature="e#1621#2287#0" expanded="false" />
+            <element signature="e#2290#2400#1" expanded="false" />
+            <element signature="e#2403#2416#0" expanded="false" />
+            <element signature="e#2486#3179#0" expanded="false" />
+            <element signature="e#3182#3433#1" expanded="false" />
           </folding>
         </state>
       </provider>
