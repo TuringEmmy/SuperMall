@@ -14,23 +14,43 @@ from areas.models import Area
 # class AreasView(APIView):
 from areas.serializers import AreaSerializer, SubAreaSeializer
 
+# 专门为了缓存而使用的类
+from rest_framework_extensions.cache.mixins import CacheResponseMixin
+
+
 # =====================反思,下面两个视图函数都是在进行查询=================
 # ===================可以使用视图集=================================
 
 
-class AreasViewSet(ReadOnlyModelViewSet):
+# class AreasViewSet(ReadOnlyModelViewSet):
+# 比上面的多继承一耳光类,就可以使用到cache,因为很明显,这里的代码,没有任何get或者list函数,所以无法添加装饰器,二灵活有为大的[python 总能有出色的方法区域完成
+
+
+# 注意::一定不要忘记在配置文件当只能怪进行设置
+# DRF扩展
+# REST_FRAMEWORK_EXTENSIONS = {
+#     # 缓存时间
+#     'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 60,
+#     # 缓存存储
+#     'DEFAULT_USE_CACHE': 'default',
+# }
+
+class AreasViewSet(CacheResponseMixin, ReadOnlyModelViewSet):
     """地区视图集"""
+
     # 注意:这里需要进行分类了
     def get_serializer(self, *args, **kwargs):
         if self.action == 'list':
             return AreaSerializer
         else:
             return SubAreaSeializer
+
     def get_queryset(self):
         if self.action == 'list':
             return Area.objects.filter(parent=None)
         else:
             return Area.objects.all()
+
 
 # ==========================================================
 
