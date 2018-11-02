@@ -1,6 +1,6 @@
 from django.contrib import admin
 
 # Register your models here.
-from goods.models import Goods
+from pictest.models import PicTest
 
-admin.site.register(Goods)
+admin.site.register(PicTest)

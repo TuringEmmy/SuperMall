@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'', include('contents.urls')),
     # CK富文本编辑器的路由
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+
 ]

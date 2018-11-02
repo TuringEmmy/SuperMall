@@ -1,3 +1,5 @@
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
 # Create your models here.
@@ -55,6 +57,7 @@ class Brand(BaseModel):
         return self.name
 
 
+
 class Goods(BaseModel):
     """
     商品SPU
@@ -66,6 +69,15 @@ class Goods(BaseModel):
     category3 = models.ForeignKey(GoodsCategory, on_delete=models.PROTECT, related_name='cat3_goods', verbose_name='三级类别')
     sales = models.IntegerField(default=0, verbose_name='销量')
     comments = models.IntegerField(default=0, verbose_name='评价数')
+
+
+
+    # CK富文本编辑器
+    desc_detail = RichTextUploadingField(default='', verbose_name='详细介绍')
+    desc_pack = RichTextField(default='', verbose_name='包装信息')
+    desc_service = RichTextUploadingField(default='', verbose_name='售后服务')
+
+
 
     class Meta:
         db_table = 'tb_goods'
@@ -138,6 +150,9 @@ class SKUImage(BaseModel):
     """
     SKU图片
     """
+    desc_detail = RichTextUploadingField(default='', verbose_name='详细介绍')
+    desc_pack = RichTextField(default='', verbose_name='包装信息')
+    desc_service = RichTextUploadingField(default='', verbose_name='售后服务')
     sku = models.ForeignKey(SKU, on_delete=models.CASCADE, verbose_name='sku')
     image = models.ImageField(verbose_name='图片')
 

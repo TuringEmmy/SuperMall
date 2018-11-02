@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     'contents.apps.ContentsConfig',
     'goods.apps.GoodsConfig',
     'pictest.apps.PictestConfig',
+
+    # 注册安装符文本编辑器
+    'ckeditor',  # 富文本编辑器
+    'ckeditor_uploader',  # 富文本编辑器上传图片模块
 ]
 
 MIDDLEWARE = [
@@ -61,9 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 注册安装符文本编辑器
-    'ckeditor',  # 富文本编辑器
-    'ckeditor_uploader',  # 富文本编辑器上传图片模块
+
 ]
 
 ROOT_URLCONF = 'meiduo_mall.urls'
@@ -321,7 +323,7 @@ FDFS_CLIENT_CONF = os.path.join(BASE_DIR, 'utils/fastdfs/client.conf')
 
 # FDFS_URL = "htt://192.168.191.133:8888/"
 # host文件设置192.168.191.133 image.meiduo.site
-FDFS_URL = "htt://iamge.meiduo,.site:8888/"
+FDFS_URL = "http://iamge.meiduo,.site:8888/"
 
 # 指定django框架所使用的问价存储类
 
