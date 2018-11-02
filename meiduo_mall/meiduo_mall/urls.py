@@ -21,7 +21,9 @@ urlpatterns = [
     url(r'', include('verifications.urls')),
     url(r'', include('users.urls')),
     url(r"^oauth/", include('oauth.urls')),
-    url(r'',include("areas.urls")),
-    url(r'',include('goods.urls')),
-    url(r'',include('contents.urls')),
+    url(r'', include("areas.urls")),
+    url(r'', include('goods.urls')),
+    url(r'', include('contents.urls')),
+    # CK富文本编辑器的路由
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]

@@ -61,6 +61,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 注册安装符文本编辑器
+    'ckeditor',  # 富文本编辑器
+    'ckeditor_uploader',  # 富文本编辑器上传图片模块
 ]
 
 ROOT_URLCONF = 'meiduo_mall.urls'
@@ -310,7 +313,7 @@ REST_FRAMEWORK_EXTENSIONS = {
     # 缓存存储
     'DEFAULT_USE_CACHE': 'default',
 }
-#/============================================================
+# /============================================================
 
 
 # =======================FDFS设置================================
@@ -325,3 +328,19 @@ FDFS_URL = "htt://iamge.meiduo,.site:8888/"
 DEFAULT_FILE_STORAGE = 'meiduo_mall.utils.fastdfs.fdfs_storage.FDFStorage'
 
 # ==========================================================================
+
+
+
+
+# ===================================CK符文本编辑器===========================
+# 富文本编辑器ckeditor配置
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',  # 工具条功能
+        'height': 300,  # 编辑器高度
+        # 'width': 300,  # 编辑器宽
+    },
+}
+CKEDITOR_UPLOAD_PATH = ''  # 上传图片保存路径，使用了FastDFS，所以此处设为''
+# 一定要设置，不能省略，胜率会使用默认的
+# ============================================================================
