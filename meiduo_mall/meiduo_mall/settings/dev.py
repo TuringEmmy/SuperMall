@@ -310,13 +310,15 @@ REST_FRAMEWORK_EXTENSIONS = {
     # 缓存存储
     'DEFAULT_USE_CACHE': 'default',
 }
-# ============================================================
+#/============================================================
 
 
 # =======================FDFS设置================================
 FDFS_CLIENT_CONF = os.path.join(BASE_DIR, 'utils/fastdfs/client.conf')
 
-FDFS_URL = "htt[://192.168.191.133:8888/"
+# FDFS_URL = "htt://192.168.191.133:8888/"
+# host文件设置192.168.191.133 image.meiduo.site
+FDFS_URL = "htt://iamge.meiduo,.site:8888/"
 
 # 指定django框架所使用的问价存储类
 
