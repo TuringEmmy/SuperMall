@@ -1,0 +1,8 @@
+manage.py    meiduo_mall/
+(meiduo) python@ubuntu:~/Desktop/SuperMall/meiduo_mall$ python manage.py createsuperuser
+Username: admin
+Email address: yonglonggeng@163.com
+Password:
+Password (again):
+Superuser created successfully.
+(meiduo) python@ubuntu:~/Desktop/SuperMall/meiduo_mall$
