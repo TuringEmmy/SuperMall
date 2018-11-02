@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'areas.apps.AreasConfig',
     'contents.apps.ContentsConfig',
     'goods.apps.GoodsConfig',
+    'pictest.apps.PictestConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,8 +132,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
 
 # =================================================================
 # =================================================================
@@ -315,7 +314,7 @@ REST_FRAMEWORK_EXTENSIONS = {
 
 
 # =======================FDFS设置================================
-FDFS_CLIENT_CONF = os.path.join(BASE_DIR,'utils/fastdfs/client.conf')
+FDFS_CLIENT_CONF = os.path.join(BASE_DIR, 'utils/fastdfs/client.conf')
 
 FDFS_URL = "htt[://192.168.191.133:8888/"
 
