@@ -44,6 +44,10 @@ class SKUImageAdmin(admin.ModelAdmin):
     def delete_model(self, request, obj):
         sku_id = obj.sku.id
         obj.delete()
+
+        """
+        反思：如果商品下架不能删除，可以逻辑删除
+        """
         from celery_tasks.html.tasks import generate_static_sku_detail_html
         generate_static_sku_detail_html.delay(sku_id)
 
