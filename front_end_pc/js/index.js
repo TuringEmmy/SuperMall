@@ -3,6 +3,7 @@
  */
 var vm = new Vue({
     el: '#app',
+    // 这个对应index.html里面为了区分django的模板
     delimiters: ['[[', ']]'],
     data: {
         host,

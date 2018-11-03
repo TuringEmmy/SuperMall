@@ -18,6 +18,7 @@
             <div class="welcome fl">欢迎来到美多商城!</div>
             <div class="fr">
                 <div v-if="username" class="login_btn fl">
+                    <!--这个地方为了区分是django的还是vue的，在这里进行区分-->
                     欢迎您：<em>[[ username ]]</em>
                     <span>|</span>
                     <a @click="logout">退出</a>

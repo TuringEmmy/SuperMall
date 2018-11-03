@@ -6,3 +6,7 @@ Password:
 Password (again):
 Superuser created successfully.
 (meiduo) python@ubuntu:~/Desktop/SuperMall/meiduo_mall$
+
+启动celcery
+celery -A celery_tasks.main worker -l
+
