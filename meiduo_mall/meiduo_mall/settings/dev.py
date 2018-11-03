@@ -347,3 +347,9 @@ CKEDITOR_CONFIGS = {
 CKEDITOR_UPLOAD_PATH = ''  # 上传图片保存路径，使用了FastDFS，所以此处设为''
 # 一定要设置，不能省略，胜率会使用默认的
 # ============================================================================
+
+
+# ============================================指定生成静态文件保存路劲=================
+# GENERATED_STATIC_HTML_FILES_DIR=os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)),'font_end_pc')
+
+GENERATED_STATIC_HTML_FILES_DIR = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'front_end_pc')
