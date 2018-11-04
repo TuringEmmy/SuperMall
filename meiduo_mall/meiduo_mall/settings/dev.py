@@ -249,6 +249,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+    #  ++++++++++++++++++++++++++++++++++分页++++++++++++++++++++++++++++++++++++++++++++++++
+    'DEFAULT_PAGINATION_CLASS': 'meiduo_mall.utils.pagination.StandardResultPagination',
 }
 
 # ===================WT扩展配置=====================================
@@ -371,9 +373,14 @@ GENERATED_STATIC_HTML_FILES_DIR = os.path.join(os.path.dirname(os.path.dirname(B
 CRONJOBS = [
     # 每5分钟执行一次生成主页静态文件
     (
-    '*/5 * * * *', 'contents.crons.generate_static_index_html', '>> ' + os.path.dirname(BASE_DIR) + '/logs/crontab.log')
+        '*/5 * * * *', 'contents.crons.generate_static_index_html',
+        '>> ' + os.path.dirname(BASE_DIR) + '/logs/crontab.log')
 ]
 # 解决crontab中文问题
 CRONTAB_COMMAND_PREFIX = 'LANG_ALL=zh_cn.UTF-8'
 
 # ===============================================================
+
+
+
+# +++++++++++++++++++++++++++++文件分页+++++++++++++++++++++++++++++++

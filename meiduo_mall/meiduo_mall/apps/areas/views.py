@@ -38,6 +38,8 @@ from rest_framework_extensions.cache.mixins import CacheResponseMixin
 class AreasViewSet(CacheResponseMixin, ReadOnlyModelViewSet):
 # class AreasViewSet( ReadOnlyModelViewSet):
     """地区视图集"""
+    pagination_class = None
+
 
     # 注意:这里需要进行分类了
     def get_serializer_class(self):
