@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
+from rest_framework.filters import OrderingFilter
 
 from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.response import Response
@@ -27,6 +28,14 @@ class SKUListView(ListAPIView):
         """返回当前视图的查询集"""
         category_id= self.kwargs['category_id']
         return SKU.objects.filter(category_id=category_id, is_launched = True)
+
+
+
+    # 设置排序的操作
+    filter_backends = [OrderingFilter]
+
+    # 指定排序的字段
+    ordering_fields = ('create_time','price','sales')
 
     # def get(self,request, category_id):
     #     """
