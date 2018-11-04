@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django_redis import get_redis_connection
 
 from rest_framework import status
 from rest_framework.decorators import action
@@ -13,6 +14,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 
+from goods.models import SKU
+from goods.serializers import SKUSerializer
 from users import serializers
 from users import constants
 from users.models import User
@@ -27,6 +30,38 @@ class BrowseHistoryView(CreateAPIView):
     # 添加权限
     permission_classes = [IsAuthenticated]
     serializer_class = BrowseHistorySerializer
+
+    def get(self, request):
+        """
+        登陆用户的浏览记录
+        :param request:
+        :return:
+        1. 从redis中获取登录用户浏览的商品的id
+        2. 根据商品的sku_id获取对应的商品的信息
+        3. 将商品的数据序列化并返回
+        """
+
+        # 获取用户登陆
+        user = request.user
+        # 1. 从redis中获取登录用户浏览的商品的id
+        redis_conn = get_redis_connection('histories')
+
+        history_key = 'history_%s' % user.id
+
+        # lrange(key,start,stop):获取redis列表的指定区间内容元素
+        # [b'<sku_id>,b'<sku_id>]   -1取所有
+        sku_ids = redis_conn.lrange(history_key, 0, -1)
+        # 2. 根据商品的sku_id获取对应的商品的信息
+        skus = []
+
+        for sku_id in sku_ids:
+            # 虽然这里是bytes类型的，但是不需要进行个是的转换，因为他会自动进行转换
+            sku = SKU.objects.get(id=sku_id)
+            skus.append(sku)
+        # 3. 将商品的数据序列化并返回
+        serializer = SKUSerializer(skus,many=True)
+
+        return Response(serializer.data)
 
 
 
