@@ -9,33 +9,29 @@ from rest_framework.views import APIView
 
 from goods.models import SKU
 
-
 # class SKUListView(APIView):
 from goods.serializers import SKUSerializer
+
 
 # ===================商品列表视图==============================
 # GET /categories/(?P<category_id>\d+)/skus/
 
 # class SKUListView(GenericAPIView):
 class SKUListView(ListAPIView):
-
     """"""
 
-    serializer_class =  SKUSerializer
-
+    serializer_class = SKUSerializer
 
     def get_queryset(self):
         """返回当前视图的查询集"""
-        category_id= self.kwargs['category_id']
-        return SKU.objects.filter(category_id=category_id, is_launched = True)
-
-
+        category_id = self.kwargs['category_id']
+        return SKU.objects.filter(category_id=category_id, is_launched=True)
 
     # 设置排序的操作
     filter_backends = [OrderingFilter]
 
     # 指定排序的字段
-    ordering_fields = ('create_time','price','sales')
+    ordering_fields = ('create_time', 'price', 'sales')
 
     # def get(self,request, category_id):
     #     """
@@ -73,4 +69,3 @@ ListAPIView
 
 然后ok
 """
-
