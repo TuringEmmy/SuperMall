@@ -7,7 +7,65 @@ from rest_framework import serializers
 # 发送邮件使用
 from django.core.mail import send_mail
 
+from goods.models import SKU
+from users.constants import USER_BROWSING_HISTORY_COUNTS_LIMIT
 from users.models import User, Address
+
+
+# =================================用户浏览记录的序列化器============================
+class BrowseHistorySerializer(serializers.Serializer):
+    """浏览历史序列化器类"""
+    sku_id = serializers.IntegerField(label='商品skud的编号', min_value=1)
+
+    def validate_sku_id(self, value):
+        """sku_id商品是否存在"""
+        try:
+            sku = SKU.objects.get(id=value)
+        except SKU.DoesNotExist:
+            raise serializers.ValidationError("商品不存在")
+
+        return value
+
+    # 重写create方法
+    def create(self, validated_data):
+        """在redis中保存登陆用户的浏览记录"""
+        # 因为商品浏览记录存在redis当中，所以在setting当中在天价一个caches的设置
+
+        user = self.context['request'].user
+
+        # 获取redis的链接
+        redis_conn = get_redis_connection('histories')
+
+        history_key = 'history_%s' % user.id
+
+        # 添加浏览记录
+        sku_id = validated_data['sku_id']
+        # 去重：如果用户已经浏览过该商品,讲该商品的sku_id从list列表中移除
+        # lrem(key,count,value)  :从redis列表中移除元素，有则移除，无则忽略
+
+        # +++++++++++++++++++++++=创建管道对象++++++++++++++++++++++++++
+        pl = redis_conn.pipeline()
+        # redis_conn.lrem(history_key,0,sku_id)
+        pl.lrem(history_key, 0, sku_id)
+
+        # 左侧加入：保持浏览顺序
+        # lpush(key,count,value)：从redis列表左侧加入元素
+        # redis_conn.lpush(history_key,sku_id)
+        pl.lpush(history_key, sku_id)
+
+        # 截取：只保留最新的几个浏览记录
+        # ltrim(key,start,stop)
+        # redis_conn.ltrim(history_key,0,USER_BROWSING_HISTORY_COUNTS_LIMIT-1)
+        pl.ltrim(history_key, 0, USER_BROWSING_HISTORY_COUNTS_LIMIT - 1)
+
+        # 一次性执行
+        pl.execute()
+
+        return validated_data
+        """
+        注意：create平时返回的是对象，在这里可以直接返回validated_data
+        上面三次的redis_conn可以创建管道，
+        """
 
 
 # ==============================邮箱验证的序列化器============================
@@ -190,7 +248,6 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-
 # ===================================地址序列化器===============================
 class UserAddressSerializer(serializers.ModelSerializer):
     """
@@ -230,6 +287,7 @@ class AddressTitleSerializer(serializers.ModelSerializer):
     """
     地址标题
     """
+
     class Meta:
         model = Address
         fields = ('title',)

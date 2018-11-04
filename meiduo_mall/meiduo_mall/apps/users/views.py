@@ -5,11 +5,10 @@ from rest_framework.decorators import action
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView, RetrieveAPIView, UpdateAPIView
+from rest_framework.generics import GenericAPIView, RetrieveAPIView, UpdateAPIView, CreateAPIView
 
 # 权限管理的
 from rest_framework.permissions import IsAuthenticated
-
 
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
@@ -17,7 +16,51 @@ from rest_framework import mixins
 from users import serializers
 from users import constants
 from users.models import User
-from users.serializers import UserSerializer, UserDetailSerializer, EmailSerializer
+from users.serializers import UserSerializer, UserDetailSerializer, EmailSerializer, BrowseHistorySerializer
+
+
+# ======================================历史访问记录====================
+# POST /browse_histories/
+# class BrowseHistoryView(APIView):
+# class BrowseHistoryView(GenericAPIView):
+class BrowseHistoryView(CreateAPIView):
+    # 添加权限
+    permission_classes = [IsAuthenticated]
+    serializer_class = BrowseHistorySerializer
+
+
+
+
+    # def post(self, request):
+    #     """
+    #     历史浏览记录的添加
+    #     :param request:
+    #     :return:
+    #     1. 获取商品的sku_id病进行校验（sku_id必传,sku_id商品是否存在）
+    #     2. redis中保存登陆用户的浏览记录
+    #     3. 返回应答，浏览记录保存用户
+    #     """
+    #     # 1. 获取商品的sku_id病进行校验（sku_id必传,sku_id商品是否存在）
+    #     serializers = self.get_serializer(data=request.data)
+    #
+    #     # 2. redis中保存登陆用户的浏览记录(create)
+    #     serializers.save()
+    #     # 3. 返回应答，浏览记录保存用户
+    #
+    #     # 返回的serializer.data就是create返回的validated_data
+    #     return Response(serializers.data,status=status.HTTP_201_CREATED)
+
+
+"""
+一上来，视图首先继承APIView,为了方便，编写一个serializer，然后直接换成GenericAPIView
+,
+再进行反思，这个创建一条记录的代码，可以使用更高高级的做法
+
+CreateAPIView视图来完成这个
+
+还有一点需要注意的是创建后的，拼凑数据不需要进行数queryset的拼凑，因为他毫无价值，这一点需要格外注意
+"""
+
 
 # Create your views here.
 
@@ -217,7 +260,6 @@ class UsernameCountView(APIView):
         }
 
         return Response(data)
-
 
 
 # ===============================================用户地址视图===========================
