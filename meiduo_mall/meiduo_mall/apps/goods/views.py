@@ -10,9 +10,32 @@ from rest_framework.views import APIView
 from goods.models import SKU
 
 # class SKUListView(APIView):
-from goods.serializers import SKUSerializer
+from goods.serializers import SKUSerializer, SKUIndexSerializer
+
+# ---------------------------搜索引擎类------------------------------
 
 
+from drf_haystack.viewsets import HaystackViewSet
+
+
+# 编写搜索视图代码
+# /sku/search/?text=<搜索关键词>
+class SKUSearchViewSet(HaystackViewSet):
+    """搜索引擎视图集"""
+    """指定索引对应的模型类"""
+    index_models = [SKU]
+
+    # 搜索时候的需要一个序列化器类，而这个需要自己编写
+    # 序列化是采用的序列化器类自行解决
+
+    # -----------------------------
+    # 搜索结果中包含两个属性：
+    # text:索引字段的内容
+    # object:搜索模型对象（此处是商品SKU对象）
+    serializer_class = SKUIndexSerializer
+
+# ----------------------------------------------------------------------------------------------------------------------------
+# ----------------------sku商品视图类---------------------------
 # ===================商品列表视图==============================
 # GET /categories/(?P<category_id>\d+)/skus/
 

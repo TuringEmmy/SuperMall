@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django_crontab',  # 定时任务
     # 搜索引擎的安装
     'haystack',
+    'cart.apps.CartConfig',
 
 ]
 
@@ -180,6 +181,14 @@ CACHES = {
     "histories": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379/4",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+    # 存储购物车记录内容
+    "cart": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/5",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -400,3 +409,7 @@ HAYSTACK_CONNECTIONS = {
 # 当添加、修改、删除数据时，自动生成索引
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+# 允许跨域请求
+CORS_ALLOW_CREDENTIALS = True
